@@ -4,6 +4,7 @@ import aula.eliel.aula.model.Biblioteca;
 import aula.eliel.aula.repository.LibRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -22,12 +23,20 @@ public class LibService {
         return libRepository.save(repository);
     }
 
-    public Biblioteca buscarLivroPorId(Long id){
+    public Biblioteca buscarLivroPorId(@PathVariable Long id){
         return libRepository.findById(id).get();
     }
 
     public void deletarLivro(Long id){
         libRepository.deleteById(id);
+    }
+
+    public Biblioteca atualizarLivro(Long id, Biblioteca libModel){
+        Biblioteca novoLivro = libRepository.findById(id).get();
+        novoLivro.setNomeDoLivro(libModel.getNomeDoLivro());
+        novoLivro.setNomeDoAutor(libModel.getNomeDoAutor());
+        novoLivro.setAnoDeLancamento(libModel.getAnoDeLancamento());
+        return libRepository.save(novoLivro);
     }
 
 
