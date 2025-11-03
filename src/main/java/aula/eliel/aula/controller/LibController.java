@@ -24,7 +24,6 @@ public class LibController {
 
     @PostMapping
     public Biblioteca CriarLivro(@RequestBody Biblioteca livro){
-
         return libService.CriarLivro(livro);
     }
 
